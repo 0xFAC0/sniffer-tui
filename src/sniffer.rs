@@ -4,7 +4,7 @@ use log::error;
 use pnet_datalink::Channel::Ethernet;
 use pnet_datalink::{self, NetworkInterface};
 
-pub fn sniff(interface_name: String, app_tx: Sender<String>) -> ! {
+pub fn sniff(interface_name: String, app_tx: Sender<String>) {
     let interface_name_match = |iface: &NetworkInterface| iface.name == interface_name;
 
     let interfaces = pnet_datalink::interfaces();

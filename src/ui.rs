@@ -62,9 +62,10 @@ fn ui<B: Backend>(f: &mut Frame<B>, app: &mut App) {
         // TODO Make footer helper
         .constraints([Constraint::Percentage(100)].as_ref())
         .split(f.size());
-    let items: Vec<ListItem> = app
-        .list
-        .items
+    let height: usize = (f.size().height - 2) as usize;
+    // Will be moved when selection movement will be implemented
+    app.scroll = app.list.items.len().checked_sub(height).unwrap_or(0);
+    let items: Vec<ListItem> = app.list.items[app.scroll..]
         .iter()
         .map(|i| ListItem::new(Span::raw(i)))
         .collect();

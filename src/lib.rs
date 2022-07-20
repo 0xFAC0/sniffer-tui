@@ -23,7 +23,7 @@ pub struct App {
     // TODO: Change string for a made struct
     pub list: StateList<String>,
     pub rx: Receiver<String>,
-    pub closed: bool,
+    pub scroll: usize,
 }
 
 impl App {
@@ -33,7 +33,7 @@ impl App {
             App {
                 list: StateList::new(),
                 rx,
-                closed: false,
+                scroll: 0,
             },
             tx,
         )
