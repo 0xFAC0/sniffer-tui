@@ -29,9 +29,16 @@ pub fn sniff(interface_name: String, app_tx: Sender<String>) {
                 if packet.len() < 14 {
                     continue;
                 }
-                app_tx
-                    .send(format!("{:?} -> {:?}", &packet[..6], &packet[6..12]))
-                    .unwrap();
+                let fmt_macaddr = |array: &[u8]| {
+                    array
+                        .iter()
+                        .map(|bits| format!("{:0>2X}", bits))
+                        .collect::<Vec<String>>()
+                        .join("::")
+                };
+                let src = fmt_macaddr(&packet[..6]);
+                let dst = fmt_macaddr(&packet[6..12]);
+                app_tx.send(format!("{} -> {}", src, dst)).unwrap();
             }
             Err(e) => error!("Error occurred while catching packets {}", e),
         }
