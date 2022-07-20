@@ -1,8 +1,4 @@
-use std::{
-    error::Error,
-    io, thread,
-    time::{Duration, Instant},
-};
+use std::{error::Error, io, time::Duration};
 
 use crossterm::{
     event::{self, poll, DisableMouseCapture, EnableMouseCapture, Event, KeyCode},
@@ -14,8 +10,8 @@ use tui::{
     backend::{Backend, CrosstermBackend},
     layout::{Alignment, Constraint, Direction, Layout},
     style::{Color, Style},
-    text::{Span, Text},
-    widgets::{Block, BorderType, Borders, List, ListItem, Paragraph},
+    text::Span,
+    widgets::{Block, BorderType, Borders, List, ListItem},
     Frame, Terminal,
 };
 
